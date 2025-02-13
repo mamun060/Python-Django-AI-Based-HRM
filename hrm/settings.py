@@ -61,7 +61,7 @@ WSGI_APPLICATION = 'hrm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'aihrm',
+        'NAME': 'django_hrm',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
