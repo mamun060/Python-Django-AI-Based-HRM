@@ -22,6 +22,6 @@ tzdata==2025.1
 ### login credential
 ```
 username: superadmin
-password: 12345678
+password: hrm12345
 email: almamun.dev21@gmail.com
 ````
