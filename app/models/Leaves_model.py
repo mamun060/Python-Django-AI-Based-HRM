@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.apps import apps
 
 class Leaves(models.Model):
     LEAVE_TYPES = [
@@ -30,9 +30,16 @@ class Leaves(models.Model):
     def save(self, *args, **kwargs):
         """ Update LeaveBalance if leave is approved """
         super().save(*args, **kwargs)  # Save the leave request
+        
         if self.status == 'Approved':
+            LeaveBalance = apps.get_model("app", "LeaveBalance")  # ✅ Fix Circular Import
             leave_balance = LeaveBalance.objects.get(employee=self.employee, leave_type=self.leave_type)
             leave_days = (self.end_date - self.start_date).days + 1
-            leave_balance.used_leaves += leave_days
-            leave_balance.remaining_leaves -= leave_days
-            leave_balance.save()
+            
+            if leave_balance.remaining_leaves >= leave_days:
+                leave_balance.used_leaves += leave_days
+                leave_balance.remaining_leaves -= leave_days
+                leave_balance.save()
+            else:
+                self.status = "Rejected"
+                super().save(*args, **kwargs)  # Update to Rejected if insufficient balance
