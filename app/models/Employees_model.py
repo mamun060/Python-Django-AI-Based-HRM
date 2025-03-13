@@ -1,6 +1,6 @@
 from django.db import models
 
-class OfficeEmployee(models.Model):
+class Employees(models.Model):
     EMPLOYMENT_STATUS_CHOICES = [
         ('full_time', 'Full Time'),
         ('permanent', 'Permanent'),
