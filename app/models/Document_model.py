@@ -1,6 +1,6 @@
 from django.db import models
 
-class Documents(models.Model):
+class Document(models.Model):
     filename = models.CharField(max_length=255)
     filedescription = models.TextField()
     file = models.FileField(upload_to='officialDocs/')
