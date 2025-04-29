@@ -1,20 +1,48 @@
+{% extends 'layouts/layouts.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Basd Human Resourse Management Systems</title>
-    <link rel="stylesheet" href="{% static 'css/HomeStyle.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>
-            Revolutionizing Workforce Management with AI: Smarter HR, Happier Employees
-        </h1>
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="dash-widget clearfix card-box">
+                <span class="dash-widget-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span>
+                <div class="dash-widget-info">
+                    <h3>112</h3>
+                    <span>Projects</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="dash-widget clearfix card-box">
+                <span class="dash-widget-icon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                <div class="dash-widget-info">
+                    <h3>44</h3>
+                    <span>Clients</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="dash-widget clearfix card-box">
+                <span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
+                <div class="dash-widget-info">
+                    <h3>37</h3>
+                    <span>Tasks</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="dash-widget clearfix card-box">
+                <span class="dash-widget-icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                <div class="dash-widget-info">
+                    <h3>218</h3>
+                    <span>Employees</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid d-flex flex-col item-center mt-10">
         <button>
             <a href="{% url 'admin:index' %}">Admin Login</a>
         </button>
     </div>
-</body>
-</html>
+{% endblock %}
