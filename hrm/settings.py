@@ -27,11 +27,9 @@ INSTALLED_APPS = [
 ]
 
 # unfold settings
-UNFOLD  ={
-    "site_title": "Intelligent HRM",
-    "site_header": "Intelligent HRM Admin",
-    "site_footer": "Intelligent HRM Admin",
-    "index_title": "Welcome to Intelligent HRM Admin Portal",
+UNFOLD = {
+    "SITE_TITLE": "Intelligent HRM",
+    "SITE_HEADER": "Intelligent HRM",
 }
 
 MIDDLEWARE = [
