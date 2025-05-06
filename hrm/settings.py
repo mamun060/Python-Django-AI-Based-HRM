@@ -30,6 +30,10 @@ INSTALLED_APPS = [
 UNFOLD = {
     "SITE_TITLE": "Intelligent HRM",
     "SITE_HEADER": "Intelligent HRM",
+    "SITE_LOGO": {
+        "light": lambda request: static("logo-free.png"),  # light mode
+        "dark": lambda request: static("logo-free.png"),  # dark mode
+    },
 }
 
 MIDDLEWARE = [
