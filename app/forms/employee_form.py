@@ -1,9 +1,9 @@
 from django import forms
-from app.models import OfficialDocument
+from app.models import Employees
 
 class EmployeeForms(forms.ModelForm):
     class Meta:
-        model = OfficialDocument
+        model = Employees
         fields = [
             'name', 
             'email', 
