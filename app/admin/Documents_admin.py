@@ -1,6 +1,7 @@
 from django.contrib import admin 
 from app.models import Document
 from unfold.admin import ModelAdmin
+from django.utils.html import format_html
 
 @admin.register(Document)
 class DocumentAdmin(ModelAdmin):
@@ -14,7 +15,6 @@ class DocumentAdmin(ModelAdmin):
 #     search_fields = ('filename', )
 # admin.site.register(Document, DocumentsAdmin)
 
-from django.utils.html import format_html
 
 class InvoiceAdmin(admin.ModelAdmin):
     list_display = ('invoice_number', 'pdf_link')

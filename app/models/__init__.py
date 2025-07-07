@@ -6,3 +6,4 @@ from .LeaveBalance_model import *
 from .TravelRequest_model import *
 from .Expense_model import *
 from .Reimbursement_model import *
+from .Payroll_model import *
