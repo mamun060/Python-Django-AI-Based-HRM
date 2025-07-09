@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+<<<<<<< HEAD
 class AttendanceRecord(models.Model):
     name = models.CharField(max_length=255)
     time = models.DateTimeField(auto_now_add=True)
@@ -13,3 +14,5 @@ class AttendanceRecord(models.Model):
         verbose_name = "Attendance Record"
         verbose_name_plural = "Attendance Records"
         ordering = ['-time']
+=======
+>>>>>>> 34accc8f6043820424f9169cdc62545edc287931

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python
 .env
 venv_hrm/
@@ -15,3 +16,7 @@ react-frontend/dist-ssr/
 
 # Root-level node modules (if exists)
 node_modules/
+=======
+/.env
+/media
+>>>>>>> 34accc8f6043820424f9169cdc62545edc287931

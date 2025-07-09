@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import os
 import cv2
 import torch
@@ -122,3 +123,8 @@ def video_feed(request):
         gen_frames(),
         content_type='multipart/x-mixed-replace; boundary=frame'
     )
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> 34accc8f6043820424f9169cdc62545edc287931
