@@ -1,2 +1,17 @@
-/.env
-/media
+# Python
+.env
+venv_hrm/
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Media / Uploads
+media/
+
+# React Frontend
+react-frontend/node_modules/
+react-frontend/dist/
+react-frontend/dist-ssr/
+
+# Root-level node modules (if exists)
+node_modules/
