@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import os
 import cv2
 import torch
@@ -37,14 +36,68 @@ class AttendanceRecordView(APIView):
         return Response(serializer.data)
 
 
+# def run_continuous_face_recognition():
+#     try:
+#         log("⏳ Starting RTSP face recognition thread...")
+#         rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
+#         cap = cv2.VideoCapture(rtsp_url)
+
+#         if not cap.isOpened():
+#             log("❌ RTSP stream could not be opened.")
+#             return
+
+#         frame_count = 0
+#         while True:
+#             success, frame = cap.read()
+#             if not success:
+#                 continue
+
+#             frame_count += 1
+#             if frame_count % 3 != 0:
+#                 continue
+
+#             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#             results = yolo_model.predict(source=frame_rgb, conf=0.5, imgsz=640, verbose=False)
+#             detected_faces = recognize_faces(frame_rgb, results, facenet_model, reference_embeddings)
+
+#             if detected_faces:
+#                 log(f"📸 Detected {len(detected_faces)} face(s).")
+#             else:
+#                 log("🖕 No faces detected.")
+
+#             for face in detected_faces:
+#                 if face['name'] == "Unknown":
+#                     continue
+
+#                 name = face['name']
+#                 now = timezone.now()
+#                 recent = now - timedelta(seconds=1)
+
+#                 if AttendanceRecord.objects.filter(name=name, time__gte=recent).exists():
+#                     log(f"⏱️ Skipped: {name} already logged recently.")
+#                     continue
+
+#                 pil_face = Image.fromarray(face["face_image"])
+#                 buffer = ContentFile(b"")
+#                 pil_face.save(buffer, format='JPEG')
+#                 buffer.seek(0)
+
+#                 record = AttendanceRecord(name=name, accuracy=face['score'])
+#                 record.image.save(f"{name}_{now.strftime('%Y%m%d%H%M%S')}.jpg", buffer, save=True)
+#                 record.save()
+
+#                 log(f"✅ Saved: {name} with {face['score']}% accuracy")
+#     except Exception as e:
+#         log(f"🔥 Thread exception: {e}")
+
+
 def run_continuous_face_recognition():
     try:
-        log("⏳ Starting RTSP face recognition thread...")
-        rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
-        cap = cv2.VideoCapture(rtsp_url)
+        log("⏳ Starting webcam face recognition thread...")
+        cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 🟢 Use your PC webcam
 
         if not cap.isOpened():
-            log("❌ RTSP stream could not be opened.")
+            log("❌ Webcam could not be opened.")
             return
 
         frame_count = 0
@@ -64,7 +117,7 @@ def run_continuous_face_recognition():
             if detected_faces:
                 log(f"📸 Detected {len(detected_faces)} face(s).")
             else:
-                log("🖕 No faces detected.")
+                log("🙈 No faces detected.")
 
             for face in detected_faces:
                 if face['name'] == "Unknown":
@@ -95,13 +148,34 @@ def run_continuous_face_recognition():
 # Start background thread
 threading.Thread(target=run_continuous_face_recognition, daemon=True).start()
 
+# ip camera version for production
+# def gen_frames():
+#     rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
+#     cap = cv2.VideoCapture(rtsp_url)
 
+#     if not cap.isOpened():
+#         raise RuntimeError("RTSP stream can't be opened")
+
+#     while True:
+#         success, frame = cap.read()
+#         if not success:
+#             continue
+
+#         ret, buffer = cv2.imencode('.jpg', frame)
+#         if not ret:
+#             continue
+
+#         yield (
+#             b'--frame\r\n'
+#             b'Content-Type: image/jpeg\r\n\r\n' + buffer.tobytes() + b'\r\n'
+#         )
+
+# webcam version for testing purposes
 def gen_frames():
-    rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
-    cap = cv2.VideoCapture(rtsp_url)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # ✅ DirectShow backend
 
     if not cap.isOpened():
-        raise RuntimeError("RTSP stream can't be opened")
+        raise RuntimeError("Webcam can't be opened")
 
     while True:
         success, frame = cap.read()
@@ -118,13 +192,9 @@ def gen_frames():
         )
 
 
+
 def video_feed(request):
     return StreamingHttpResponse(
         gen_frames(),
         content_type='multipart/x-mixed-replace; boundary=frame'
     )
-=======
-from django.shortcuts import render
-
-# Create your views here.
->>>>>>> 34accc8f6043820424f9169cdc62545edc287931

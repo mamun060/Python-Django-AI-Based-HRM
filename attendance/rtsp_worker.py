@@ -82,42 +82,40 @@
 #     cap.release()
 
 
+# import cv2
+# import datetime
+# import time
+
+# rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
+# cap = cv2.VideoCapture(rtsp_url)
+
+# frame_count = 0
+# start_time = time.time()
+
+# while True:
+#     success, frame = cap.read()
+#     if not success:
+#         continue
+
+#     frame_count += 1
+#     elapsed = time.time() - start_time
+#     fps = frame_count / elapsed
+
+#     # Optional: show FPS
+#     cv2.putText(frame, f"FPS: {fps:.2f}", (10, 60),
+#                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+
+#     # Print FPS every 50 frames
+#     if frame_count % 50 == 0:
+#         print(f"Processed {frame_count} frames, FPS: {fps:.2f}")
+
+#     cv2.imshow("RTSP Feed (Check Delay)", frame)
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
 
-import cv2
-import datetime
-import time
-
-rtsp_url = 'rtsp://nabi:demo12345@192.168.2.194:554/h264'
-cap = cv2.VideoCapture(rtsp_url)
-
-frame_count = 0
-start_time = time.time()
-
-while True:
-    success, frame = cap.read()
-    if not success:
-        continue
-
-    frame_count += 1
-    elapsed = time.time() - start_time
-    fps = frame_count / elapsed
-
-    # Optional: show FPS
-    cv2.putText(frame, f"FPS: {fps:.2f}", (10, 60),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
-
-    # Print FPS every 50 frames
-    if frame_count % 50 == 0:
-        print(f"Processed {frame_count} frames, FPS: {fps:.2f}")
-
-    cv2.imshow("RTSP Feed (Check Delay)", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()
 
 
 

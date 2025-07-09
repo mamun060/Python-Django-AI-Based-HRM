@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'attendance',
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 # unfold settings
@@ -46,6 +47,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'hrm.urls'
@@ -134,3 +137,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Allow CORS for frontend development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # ✅ React default dev server
+    "http://192.168.0.27:3000",  # ✅ React dev server on local network
+    "http://localhost:5173",  # ✅ Vite dev server
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
