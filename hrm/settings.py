@@ -128,10 +128,6 @@ STATICFILES_DIRS = [
 MDDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 34accc8f6043820424f9169cdc62545edc287931
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
