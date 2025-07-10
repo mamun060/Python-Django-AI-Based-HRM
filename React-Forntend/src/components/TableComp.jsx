@@ -53,6 +53,9 @@ useEffect(() => {
 
   return (
     <>
+    <div>
+      <h2 className="text-xl font-bold mb-10">Attendance Records</h2>
+    </div>
       {/* Filter Inputs */}
       <div className="flex flex-wrap gap-4 mb-4">
         <input

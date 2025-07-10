@@ -20,9 +20,7 @@ const Navbar = () => {
           </button>
           HRM
         </div>
-
-
-      
+        
         </div>
 
       {/* Main Content */}

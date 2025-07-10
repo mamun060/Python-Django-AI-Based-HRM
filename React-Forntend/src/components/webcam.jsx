@@ -8,7 +8,7 @@ export default function WebcamComponent() {
       <img
         ref={imgRef}
         src="http://127.0.0.1:8000/video-feed/"
-        alt="RTSP Stream"
+        alt="Live Stream"
         crossOrigin="anonymous"
         style={{ width: '100%' }}
       />
