@@ -4,6 +4,7 @@ from unfold.admin import ModelAdmin
 
 @admin.register(LeaveBalance)
 class LeaveBalanceAdmin(ModelAdmin):
+    pass
     list_display = (
         "employee",
         "leave_type",

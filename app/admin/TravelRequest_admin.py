@@ -4,6 +4,7 @@ from unfold.admin import ModelAdmin
 
 @admin.register(TravelRequest)
 class TravelRequestAdmin(ModelAdmin):
+    pass
     list_display = (
         "employee",
         "destination",

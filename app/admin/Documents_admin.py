@@ -14,6 +14,7 @@ class DocumentAdmin(ModelAdmin):
 #     list_display = ('filename' , 'filedescription' , 'file')
 #     search_fields = ('filename', )
 # admin.site.register(Document, DocumentsAdmin)
+# admin.site.register(Document, DocumentsAdmin)
 
 
 class InvoiceAdmin(admin.ModelAdmin):

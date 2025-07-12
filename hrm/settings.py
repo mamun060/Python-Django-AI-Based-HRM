@@ -23,9 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'app',
     'attendance',
-    'rest_framework'
+    'churn_prediction'
 ]
 
 # unfold settings
@@ -46,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'hrm.urls'
@@ -55,6 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'churn_prediction', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,10 +133,18 @@ STATICFILES_DIRS = [
 MDDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# Allow CORS for frontend development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # ✅ React default dev server
+    "http://192.168.0.27:3000",  # ✅ React dev server on local network
+    "http://localhost:5173",  # ✅ Vite dev server
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
