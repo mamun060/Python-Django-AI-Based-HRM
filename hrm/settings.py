@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'app',
     'attendance',
-    # 'churn_prediction'
+    'churn_prediction'
 ]
 
 # unfold settings

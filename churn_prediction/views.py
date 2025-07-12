@@ -1,15 +1,16 @@
-import pickle
-import numpy as np
 import os
+import numpy as np
+import pickle
 import pandas as pd
 from django.shortcuts import render
+from django.conf import settings
+from .forms import EmployeeInputForm
 
 # Django project directory থেকে BASE_DIR নিন
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Load the CSV data
-csv_path = os.path.join(BASE_DIR, 'churn_prediction', 'Perfomance_report.csv')
-
+csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Perfomance_report.csv')
 df = pd.read_csv(csv_path)
 
 # Rename columns to match the required names
@@ -109,7 +110,7 @@ def home(request):
             input_data_encoded = pd.get_dummies(input_data, drop_first=True)
 
             # Match columns with the model's expected features
-            input_data_encoded = input_data_encoded.reindex(columns=model.feature_importances_, fill_value=0)
+            input_data_encoded = input_data_encoded.reindex(columns=scaler.get_feature_names_out(), fill_value=0)
 
             # Scale the features using the loaded scaler
             features_scaled = scaler.transform(input_data_encoded)
@@ -159,4 +160,36 @@ def home(request):
         'prediction': prediction, 
         'kpi_info': kpi_info, 
         'sample_data': sample_data
+    })
+
+
+
+def predict_employee_status(request):
+    prediction = None
+    kpi_info = None
+
+    if request.method == 'POST':
+        form = EmployeeInputForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+
+            # Extract features and make prediction using your model
+            # (Add your model prediction logic here)
+
+            prediction = "Stay"  # or "Leave" from model.predict
+            kpi_info = {
+                "Age": data['age'],
+                "Work_Hours_Per_Week": data['work_hours'],
+                "Satisfaction_Score": data['satisfaction'],
+                "Performance_KPI": "85%",  # mock or calculated
+                "Match_Status": "Good Match",
+                "Employee_IDs": [1001, 1004],  # mock IDs
+            }
+    else:
+        form = EmployeeInputForm()
+
+    return render(request, 'your_template.html', {
+        'form': form,
+        'prediction': prediction,
+        'kpi_info': kpi_info,
     })
