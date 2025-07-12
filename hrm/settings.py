@@ -23,10 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'app',
     'attendance',
-    'rest_framework',
-    'corsheaders'
+    # 'churn_prediction'
 ]
 
 # unfold settings
@@ -58,6 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'churn_prediction', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
