@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'app',
     'attendance',
-    'churn_prediction'
+    'churn_prediction',
+    'employee',
 ]
 
 # unfold settings
@@ -38,6 +39,11 @@ UNFOLD = {
         "light": lambda request: static("logo-free.png"),  # light mode
         "dark": lambda request: static("logo-free.png"),  # dark mode
     },
+    "EXTENSIONS": {
+        "tailwind": {
+            "ENABLED": True
+        }
+    }
 }
 
 MIDDLEWARE = [

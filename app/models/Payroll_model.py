@@ -1,5 +1,5 @@
 from django.db import models
-from .Employee_model import Employee
+from employee.models import Employee
 
 class Payroll(models.Model):
     PAYROLL_STATUS_CHOICES = [
