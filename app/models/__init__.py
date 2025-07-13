@@ -1,5 +1,4 @@
 from .Document_model import *
-from .Employee_model import *
 from .Attendance_model import *
 from .Leaves_model import *
 from .LeaveBalance_model import *

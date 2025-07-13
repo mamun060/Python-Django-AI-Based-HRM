@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from employee.models import Employee
 
 class TravelRequest(models.Model):
-    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     destination = models.CharField(max_length=255)
     purpose = models.TextField()
     start_date = models.DateField()

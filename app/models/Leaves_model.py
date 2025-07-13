@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from employee.models import Employee
 from django.apps import apps
 
 class Leaves(models.Model):
@@ -17,7 +17,7 @@ class Leaves(models.Model):
         ('Rejected', 'Rejected'),
     ]
 
-    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     leave_type = models.CharField(max_length=20, choices=LEAVE_TYPES)
     start_date = models.DateField()
     end_date = models.DateField()

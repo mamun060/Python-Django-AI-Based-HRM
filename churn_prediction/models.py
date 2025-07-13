@@ -1,6 +1,6 @@
 # churn_prediction/models.py
 from django.db import models
-from app.models import Employee
+from employee.models import Employee
 
 class EmployeeInput(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE,)
