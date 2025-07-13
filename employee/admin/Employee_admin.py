@@ -20,15 +20,26 @@ class EmployeeAdmin(ModelAdmin):
 
     fieldsets = (
         ('Basic Info', {
-            'fields': ('employee_id', 'name', 'email', 'phone')
+            'fields': (
+                ('employee_id', 'name'),
+                ('email', 'phone'),
+            )
         }),
         ('Job Details', {
-            'fields': ('department', 'position', 'job_type', 'salary', 'employment_status', 'joining_date')
+            'fields': (
+                ('department', 'position'),
+                ('job_type', 'salary'),
+                ('employment_status', 'joining_date')
+            )
         }),
         ('Address Info', {
-            'fields': ('present_address', 'permanent_address')
+            'fields': (
+                ('present_address', 'permanent_address'),
+            )
         }),
         ('Documents & Media', {
-            'fields': ('employee_photo', 'employee_doc')
+            'fields': (
+                ('employee_photo', 'employee_doc'),
+            )
         }),
     )
