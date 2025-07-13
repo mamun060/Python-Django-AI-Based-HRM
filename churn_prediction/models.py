@@ -1,11 +1,11 @@
 # churn_prediction/models.py
-
 from django.db import models
+from app.models import Employee
 
 class EmployeeInput(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE,)
     GENDER_CHOICES = [('Male', 'Male'), ('Female', 'Female')]
     OVERTIME_CHOICES = [('Yes', 'Yes'), ('No', 'No')]
-
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     satisfaction = models.FloatField()
