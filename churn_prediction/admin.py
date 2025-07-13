@@ -3,10 +3,21 @@ from django.contrib import admin
 from .models import EmployeeInput
 from .forms import EmployeeInputForm
 from .predict import predict_employee_status  # your custom prediction function
+from app.models import Employee
 
 class EmployeeInputAdmin(ModelAdmin):
-    list_display = ('id', 'age', 'gender', 'emp_job_role', 'satisfaction', 'predicted_churn')
+    list_display = ('id', 'employee_name', 'employee_role', 'age', 'gender', 'emp_job_role', 'satisfaction', 'predicted_churn')
     list_filter = ('gender', 'emp_department', 'emp_job_role', 'overtime')
+    search_fields = ('employee__name', 'employee__role', 'emp_job_role')
+    
+    def employee_name(self, obj):
+        return obj.employee.name
+
+    def employee_role(self, obj):
+        return obj.employee.designation
+
+    employee_name.short_description = 'Employee Name'
+    employee_role.short_description = 'Employee designation'
 
     fieldsets = (
         ('Basic Info', {
@@ -35,15 +46,15 @@ class EmployeeInputAdmin(ModelAdmin):
                 (
                     'emp_job_involvement', 'emp_last_salary_hike_percent', 'total_work_experience_in_years'
                 ),
-                (
-                    'predicted_churn'
-                )
+                # (
+                #     'predicted_churn'
+                # )
             ),
             'classes': ('unfold',),
         }),
     )
 
-    readonly_fields = ('predicted_churn',)
+    # readonly_fields = ('predicted_churn',)
 
     def save_model(self, request, obj, form, change):
         # Assuming you have a predict_employee_status function defined elsewhere
