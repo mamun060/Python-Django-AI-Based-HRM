@@ -6,7 +6,6 @@ __pycache__/
 *.sqlite3
 
 # Media / Uploads
-media/
 attendance_images/
 # React Frontend
 react-frontend/node_modules/

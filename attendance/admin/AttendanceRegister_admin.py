@@ -1,23 +1,14 @@
 from django.contrib import admin
-from django import forms
-from attendance.models import AttendanceRegister
-from django.forms.widgets import ClearableFileInput
+from attendance.models import AttendanceRegister, AttendanceImage
+from unfold.admin import ModelAdmin
 
+class AttendanceImageInline(admin.TabularInline):
+    model = AttendanceImage
+    extra = 3
+    min_num = 1
+    max_num = 10 
 
 @admin.register(AttendanceRegister)
-class AttendanceRegisterAdmin(admin.ModelAdmin):
-    list_display = ('employee', 'username')
-    search_fields = ('employee__name', 'username')
-
-    def save_model(self, request, obj, form, change):
-        files = request.FILES.getlist('image')
-        employee = form.cleaned_data.get('employee')
-        username = form.cleaned_data.get('username')
-
-        if files:
-            # Create a separate AttendanceRegister record for each image
-            for f in files:
-                AttendanceRegister.objects.create(employee=employee, username=username, image=f)
-        else:
-            # fallback to default save if no files uploaded
-            super().save_model(request, obj, form, change)
+class AttendanceRegisterAdmin(ModelAdmin):
+    list_display = ('username', 'employee')
+    inlines = [AttendanceImageInline]

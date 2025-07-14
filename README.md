@@ -19,6 +19,19 @@ sqlparse==0.5.3
 tzdata==2025.1
 ```
 
+### Installed library
+```
+pip install django
+pip install django-unfold
+pip install djangorestframework
+pip install django-cors-headers
+
+# AI library
+pip install facenet-pytorch
+pip install huggingface_hub
+pip install ultralytics
+```
+
 ### login credential
 ```
 username: superadmin
