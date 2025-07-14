@@ -22,14 +22,23 @@ tzdata==2025.1
 ### Installed library
 ```
 pip install django
+pip install mysqlclient
 pip install django-unfold
 pip install djangorestframework
 pip install django-cors-headers
+pip install pillow
 
-# AI library
+AI library
+pip install pandas
+pip install scikit-learn
+pip install opencv-python
+pip install torch
 pip install facenet-pytorch
 pip install huggingface_hub
 pip install ultralytics
+pip install torchvision
+pip install ultralytics
+pip install huggingface-hub
 ```
 
 ### login credential
