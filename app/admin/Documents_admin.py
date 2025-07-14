@@ -7,7 +7,7 @@ from django.utils.html import format_html
 class DocumentAdmin(ModelAdmin):
     list_display = ('filename', 'filedescription', 'file')
     search_fields = ('filename',)
-    list_filter = ('filedescription',)
+    list_filter = ('filedescription', "file")
     ordering = ('-id',)
     list_per_page = 20
 # class DocumentsAdmin(admin.ModelAdmin):

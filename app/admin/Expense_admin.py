@@ -5,6 +5,8 @@ from unfold.admin import ModelAdmin
 @admin.register(Expense)
 class ExpenseAdmin(ModelAdmin):
     pass
-    list_display = ("travel_request", "category", "amount", "verified")
-    search_fields = ("travel_request__employee__username", "category")
-    list_filter = ("verified", "category")
+    list_display = ("name", "expense_type", "amount", "verified", "receipt")
+    search_fields = ("name", "expense_type")
+    list_filter = ("verified", "expense_type")
+    ordering = ('-id',)
+    list_per_page = 20

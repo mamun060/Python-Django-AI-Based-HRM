@@ -25,7 +25,6 @@ augment = Compose([
 ])
 
 
-
 def load_reference_embeddings(reference_dir, facenet):
     reference_embeddings = {}
 
