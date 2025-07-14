@@ -1,5 +1,8 @@
 from pathlib import Path
 import os 
+from django.templatetags.static import static
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,14 +16,35 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'rest_framework',
+    'corsheaders',
+    'app',
+    'attendance',
+    'churn_prediction',
+    'employee',
 ]
+
+# unfold settings
+UNFOLD = {
+    "SITE_TITLE": "Intelligent HRM",
+    "SITE_HEADER": "Intelligent HRM",
+    "SITE_LOGO": {
+        "light": lambda request: static("logo-free.png"),  # light mode
+        "dark": lambda request: static("logo-free.png"),  # dark mode
+    },
+    "EXTENSIONS": {
+        "tailwind": {
+            "ENABLED": True
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -30,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'hrm.urls'
@@ -39,6 +65,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'churn_prediction', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,3 +143,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Allow CORS for frontend development
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # ✅ React default dev server
+    "http://192.168.0.27:3000",  # ✅ React dev server on local network
+    "http://localhost:5173",  # ✅ Vite dev server
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True

@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.apps import apps
+from employee.models import Employee
 
 class Leaves(models.Model):
     LEAVE_TYPES = [
@@ -17,7 +17,7 @@ class Leaves(models.Model):
         ('Rejected', 'Rejected'),
     ]
 
-    employee = models.ForeignKey(User, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     leave_type = models.CharField(max_length=20, choices=LEAVE_TYPES)
     start_date = models.DateField()
     end_date = models.DateField()
@@ -25,21 +25,25 @@ class Leaves(models.Model):
     remarks = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.employee.username} - {self.leave_type} - {self.status}"
+        return f"{self.employee.name} - {self.leave_type} - {self.status}"
 
     def save(self, *args, **kwargs):
-        """ Update LeaveBalance if leave is approved """
-        super().save(*args, **kwargs)  # Save the leave request
-        
+        LeaveBalance = apps.get_model("app", "LeaveBalance")
+
+        # Calculate leave duration
+        leave_days = (self.end_date - self.start_date).days + 1
+
         if self.status == 'Approved':
-            LeaveBalance = apps.get_model("app", "LeaveBalance")  # ✅ Fix Circular Import
-            leave_balance = LeaveBalance.objects.get(employee=self.employee, leave_type=self.leave_type)
-            leave_days = (self.end_date - self.start_date).days + 1
-            
+            leave_balance, _ = LeaveBalance.objects.get_or_create(
+                employee=self.employee,
+                leave_type=self.leave_type,
+                defaults={'total_leaves': 0, 'used_leaves': 0}
+            )
+
             if leave_balance.remaining_leaves >= leave_days:
                 leave_balance.used_leaves += leave_days
-                leave_balance.remaining_leaves -= leave_days
                 leave_balance.save()
             else:
                 self.status = "Rejected"
-                super().save(*args, **kwargs)  # Update to Rejected if insufficient balance
+
+        super().save(*args, **kwargs)
