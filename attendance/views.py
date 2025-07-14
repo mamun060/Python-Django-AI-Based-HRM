@@ -12,7 +12,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.http import StreamingHttpResponse
-from .models import AttendanceRecord
+from attendance.models import AttendanceRecord
 from .serializers import AttendanceRecordSerializer
 from .utils.face_recognition import load_reference_embeddings, recognize_faces
 from .utils.model_loader import load_yolo_model, load_facenet_model
@@ -21,7 +21,7 @@ from .utils.model_loader import load_yolo_model, load_facenet_model
 yolo_model = load_yolo_model()
 facenet_model = load_facenet_model()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-reference_dir = os.path.join(settings.BASE_DIR, 'attendance', 'media')
+reference_dir = os.path.join(settings.BASE_DIR, 'media/attendance')
 reference_embeddings = load_reference_embeddings(reference_dir, facenet_model.to(device))
 
 
