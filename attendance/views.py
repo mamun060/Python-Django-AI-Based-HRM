@@ -12,7 +12,8 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.http import StreamingHttpResponse
-from attendance.models import AttendanceRecord
+from attendance.models import AttendanceRecord , DailyAttendanceSummary
+from employee.models import Employee
 from .serializers import AttendanceRecordSerializer
 from .utils.face_recognition import load_reference_embeddings, recognize_faces
 from .utils.model_loader import load_yolo_model, load_facenet_model
@@ -24,10 +25,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 reference_dir = os.path.join(settings.BASE_DIR, 'media/attendance')
 reference_embeddings = load_reference_embeddings(reference_dir, facenet_model.to(device))
 
-
 def log(msg: str):
     print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - {msg}")
-
 
 class AttendanceRecordView(APIView):
     def get(self, request, *args, **kwargs):
@@ -198,3 +197,31 @@ def video_feed(request):
         gen_frames(),
         content_type='multipart/x-mixed-replace; boundary=frame'
     )
+
+
+# def update_daily_summary(username):
+#     try:
+#         employee = Employee.objects.get(username=username)
+#     except Employee.DoesNotExist:
+#         return
+
+#     today = datetime.today().date()
+
+#     # Get all today's records for this user
+#     records = AttendanceRecord.objects.filter(name=username, time__date=today).order_by('time')
+#     if not records.exists():
+#         return
+
+#     in_time = records.first().time.time()
+#     out_time = records.last().time.time()
+
+#     # Calculate total time in hours
+#     duration = datetime.combine(today, out_time) - datetime.combine(today, in_time)
+#     total_hours = round(duration.total_seconds() / 3600, 2)
+
+#     # Save/update summary
+#     summary, created = DailyAttendanceSummary.objects.get_or_create(employee=employee, date=today)
+#     summary.in_time = in_time
+#     summary.out_time = out_time
+#     summary.total_hours = total_hours
+#     summary.save()
