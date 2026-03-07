@@ -1,0 +1,8 @@
+/* Make form fields in the same row equal width */
+.form-row div.fieldBox {
+    flex: 1;
+    margin-right: 10px;
+}
+.form-row div.fieldBox:last-child {
+    margin-right: 0;
+}
