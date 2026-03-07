@@ -29,3 +29,6 @@ class Attendance(models.Model):
 
     def __str__(self):
         return f"{self.employee.username} - {self.date} - {self.status}"
+
+    class Meta:
+        db_table = 'app_attendance'
