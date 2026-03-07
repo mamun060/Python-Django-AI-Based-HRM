@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'attendance',
     'churn_prediction',
     'employee',
+    'django_extensions',
 ]
 
 # unfold settings
