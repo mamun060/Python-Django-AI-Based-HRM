@@ -9,7 +9,7 @@
 
 *An enterprise-grade, AI-powered Human Resource Management platform featuring contactless biometric facial recognition attendance and predictive employee churn analytics.*
 
-### Here is thesis book url: [https://drive.google.com/file/d/1ikxA03HZAQhp3T4r9RSXgamX1vcZw8PH/view?usp=drive_link]
+### Here Is The Thesis Book url: [https://drive.google.com/file/d/1ikxA03HZAQhp3T4r9RSXgamX1vcZw8PH/view?usp=drive_link]
 </div>
 
 ---
